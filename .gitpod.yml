@@ -1,0 +1,14 @@
+image:
+  file: .gitpod.Dockerfile
+
+ports:
+  - port: 8000
+    onOpen: open-browser
+  - port: 8001
+    onOpen: ignore
+
+tasks:
+  - init: yarn
+    command: yarn start
+  - command: cp /home/gitpod/local_config.yaml /workspace/console/server/local_config.yaml
+  - command: sed 's/hostname.*:/hostname.replace("8000", "8001") :/' server/views/index.html -i
